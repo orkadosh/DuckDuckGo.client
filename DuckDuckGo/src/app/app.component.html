@@ -354,7 +354,7 @@
         </svg>
         <div>
           <div class="cards">
-            Total Items: {{searchService.links?.length}}
+            Total Items: {{searchService.totalItems}}
             <div class="flex-item" *ngFor="let link of searchService.links">
               <!-- {{link|json}} -->
               <!-- icon {{(link|json).Icon?.URL}} -->
@@ -379,6 +379,21 @@
            <span > No Results please try diffrent search...</span> 
           </div>
         </div>
+
+        <mat-paginator [length]="searchService.totalItems"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="onPageChange($event)"
+               aria-label="Select page">
+               <!-- (page)="pageEvent = $event" -->
+</mat-paginator>
+
+<div *ngIf="pageEvent">
+  <h5>Page Change Event Properties</h5>
+  <div>List length: {{pageEvent.length}}</div>
+  <div>Page size: {{pageEvent.pageSize}}</div>
+  <div>Page index: {{pageEvent.pageIndex}}</div>
+</div>
       </div>
 
 
